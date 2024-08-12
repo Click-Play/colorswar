@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'confirmation_dialog.dart';
 import './../main.dart';
 
 class LanguageSelectionScreen extends StatelessWidget {
@@ -30,13 +31,16 @@ class LanguageSelectionScreen extends StatelessWidget {
       BuildContext context, String code, String language) {
     return ListTile(
       title: Text(language),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LoadingScreen(language: code),
-          ),
-        );
+      onTap: () async {
+        bool? confirmed = await showConfirmationDialog(context, language);
+        if (confirmed == true) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LoadingScreen(language: code),
+            ),
+          );
+        }
       },
     );
   }
