@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'pages/languageselect.dart';
+import './pages/menu.dart'; // Import MenuPage
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: const LanguageSelectionScreen(), // Start with language selection
+      home: const LanguageSelectionScreen(),
     );
   }
 }
@@ -79,6 +80,14 @@ class _LoadingScreenState extends State<LoadingScreen>
         curve: Curves.linear,
       ),
     );
+
+    // Delay navigation to MenuPage by 2 seconds
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const MenuPage()),
+      );
+    });
   }
 
   @override
